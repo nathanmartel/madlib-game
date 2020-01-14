@@ -1,39 +1,69 @@
 // Variable declaration
-const madlibInputOne = document.getElementById('input-1');
-const madlibInput = [];
-const madlibOutput = [];
-let i = 0;
-const madlibPieces = ['Noun', 'Verb', 'Past Tense Verb', 'Person', '-ing Verb', 'Verb', 'Plural Noun'];
+const madlibPieces = [{
+    type : 'Plural Noun',
+    enteredLyric : '',
+    originalLyric : ''
+}, {
+    type : 'Verb',
+    enteredLyric : '',
+    originalLyric:  ''
+}, {
+    type : 'Past-tense Verb',
+    enteredLyric : '',
+    originalLyric:  ''
+}, {
+    type : 'Noun',
+    enteredLyric : '',
+    originalLyric:  ''
+}, {
+    type : '-ing Verb',
+    enteredLyric : '',
+    originalLyric:  ''
+}, {
+    type : 'Plural Noun',
+    enteredLyric : '',
+    originalLyric: ''
+}];
 
 
-// Get Inputs
-while (i < madlibPieces.length) {
-    const inputName = 'input-' + i;
-    madlibInput[i] = document.getElementById(inputName);
-    console.log('Input = ' + madlibInput[i]);
-    i++;
-}
-
-// Output Madlib Function
-function makeMadlib() {
-    i = 0;
-    while (i < madlibPieces.length) {
-        const outputName = 'madlib-word-' + i;
-        madlibOutput[i] = document.getElementById(outputName);
-        console.log('Output = ' + madlibOutput[i]);
-        if (madlibInput[i]) { 
-            madlibOutput[i].textContent = madlibInput[i].value;
-        }
-        i++;
+// Output user input fields in HTML
+function outputMadlibQuestions() {
+    for (let i = 0; i < madlibPieces.length; i++) {
+        document.getElementById('user-input').innerHTML += `
+        <div class="madlib-question">
+            <label><span class="question-number">` + (i+1) + `.</span> <span class="question-label">` + madlibPieces[i].type + `:</span> 
+                <input id="input-` + i + `" />
+            </label>
+        </div>`;
     }
 }
 
-// function makeMadlibOld() {
-//     console.log('In makeMadlib!');    
-//     const madlibOutput1 = document.getElementById('madlib-word-1');
-//     madlibOutput1.textContent = madlibInput1.value;
-// }
+
+// Output Madlib Function from Object
+function makeMadlibObject() {
+    for (let i = 0; i < madlibPieces.length; i++) {
+        // Get input
+        let madlibInput = document.getElementById('input-' + i);
+        // Preserve original word 
+        madlibPieces[i].enteredLyric = madlibInput.value;
+
+        // Target output
+        let madlibOutput = document.getElementById('madlib-word-' + i);
+        madlibPieces[i].originalLyric = madlibOutput.textContent;
+        // Write output if user entered anything and add class
+        if (madlibPieces[i].enteredLyric) { 
+            madlibOutput.textContent = madlibPieces[i].enteredLyric;
+            madlibOutput.className = "entered";
+        }
+    }
+    document.getElementById('madlib').style.display = 'inherit';
+}
+
 
 // Define Event Listeners
 const mySubmitButton = document.getElementById('submitButton');
-mySubmitButton.addEventListener('click', makeMadlib);
+mySubmitButton.addEventListener('click', makeMadlibObject);
+
+
+// Init!
+outputMadlibQuestions();

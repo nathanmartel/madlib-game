@@ -1,0 +1,52 @@
+* { box-sizing: border-box; }
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    text-align: center;
+}
+
+.madlib-question {
+    background-color: lightblue;
+    padding: .8rem;
+    margin: 0 auto .5rem auto;
+    width: 22rem;
+    text-align: left;
+}
+
+.question-label {
+    width: 10rem;
+    display: inline-block;
+}
+
+input { 
+    padding: .3rem;
+}
+
+button {
+    font-size: 1.5rem;
+    padding: .5rem 2rem;
+    margin: 1.5rem 0;
+    border-radius: 9px;
+}
+
+#madlib { 
+    display: none;
+    background-color: #efefef;
+    font-size: 1.5rem;
+    padding: 2rem;
+    margin-top: 3rem;
+}
+
+#madlib p { 
+    margin: 1rem;
+}
+
+#madlib span { 
+    font-weight: bold;
+    color: darkred;
+}
+
+#madlib span.entered { 
+    color: darkgreen;
+}
+
